@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, Date, Float
 
-from . import db
+from . import db, logger
 
 
 class Order(db.Model):
@@ -17,7 +17,19 @@ class Order(db.Model):
         ]
         try:
             data_frame.to_sql(
-                name="order", if_exists="replace", con=db.engine, index=False
+                name="order",
+                if_exists="replace",
+                con=db.engine,
+                index=False,
+                dtype={
+                    "id": Integer(),
+                    "order_name": Integer(),
+                    "price_usd": Integer(),
+                    "price_rub": Float(),
+                    "expires_in": Date(),
+                },
             )
-        except Exception as e:
-            print(e)
+        except Exception as error:
+            logger.error(f"Data base update finished with errors: {error}")
+        else:
+            logger.info("Data base was successfuly updated")

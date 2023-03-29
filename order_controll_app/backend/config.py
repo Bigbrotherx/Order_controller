@@ -37,3 +37,10 @@ class GoogleConfig:
         / "order-controller-ae26d5f5c0b4.json"
     )
     FILE_ID = os.getenv("FILE_ID")
+
+    COLUMN_NAMES = [
+        "№",
+        "заказ №",
+        "стоимость,$",
+        "срок поставки",
+    ]
