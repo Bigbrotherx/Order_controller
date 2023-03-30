@@ -147,6 +147,7 @@ dmypy.json
 
 # папки со статикой и медиа
 media/
+static/
 
 # сервисные файлы
 service_files/
@@ -163,4 +164,3 @@ lerna-debug.log
 npm-debug.log*
 /.changelog
 .npm/
-static/frontend/
