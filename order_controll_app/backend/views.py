@@ -4,12 +4,22 @@ from .models import Order
 from . import logger
 
 
+class MyDateFormat(fields.Raw):
+    def format(self, value):
+        return value.strftime("%d.%m.%Y")
+
+
+class ShortFloat(fields.Raw):
+    def format(self, value):
+        return float(f"{value:.2f}")
+
+
 resourse_fields = {
     "id": fields.Integer,
     "order_name": fields.Integer,
     "price_usd": fields.Integer,
-    "price_rub": fields.Float,
-    "expires_in": fields.DateTime(dt_format="iso8601"),
+    "price_rub": ShortFloat,
+    "expires_in": MyDateFormat,
 }
 
 
