@@ -102,7 +102,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -150,7 +149,6 @@ media/
 static/
 
 # сервисные файлы
-service_files/
 requirements.in
 
 #React app
@@ -164,3 +162,4 @@ lerna-debug.log
 npm-debug.log*
 /.changelog
 .npm/
+main.js*

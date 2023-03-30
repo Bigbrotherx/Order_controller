@@ -1,0 +1,127 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+.app {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.data {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container-table {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.icon-box {
+  margin-right: 16px;
+  height: 64px;
+  width: 64px;
+  background-image: url("../public/logo.png");
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: xx-large;
+}
+
+textarea {
+  width: 250px;
+  height: 50px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: white;
+}
+
+svg {
+  margin-top: 30px;
+  display: block;
+
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+tspan {
+  color: #fff;
+}
+
+th,
+td {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+th {
+  text-align: left;
+}
+
+thead th {
+  background-color: #55608f;
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+tbody td {
+  position: relative;
+}

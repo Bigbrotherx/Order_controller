@@ -4,6 +4,8 @@ from . import db, logger
 
 
 class Order(db.Model):
+    """Класс для ORM модели"""
+
     id = Column(Integer, primary_key=True)
     order_name = Column(Integer, unique=True)
     price_usd = Column(Integer)
@@ -11,6 +13,7 @@ class Order(db.Model):
     expires_in = Column(Date)
 
     def update_data(data_frame, currency_rate):
+        """Метод обновления данных полученных из pandas.data_frame"""
         data_frame["price_rub"] = [
             int(each_value) * currency_rate
             for each_value in data_frame.price_usd.values

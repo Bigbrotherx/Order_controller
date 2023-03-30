@@ -3,14 +3,16 @@ import { useLoaderData } from "react-router-dom";
 import MyGraph from "./MyGraph";
 import { useTable } from "react-table";
 
+const BASE_URL = "http://localhost:5000/order-info";
+
 export default function HomePageContent() {
   const { data } = useLoaderData();
-
   const [tableData, setTableData] = useState(data);
   const [total, setTotal] = useState(getTotalPrice(data));
+  const [isOrdersLoadingError, setIsOrdersLoadingError] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(getBackendData, 60000);
+    const interval = setInterval(getOrdersData, 60000);
     return function cleanup() {
       clearInterval(interval);
     };
@@ -23,9 +25,7 @@ export default function HomePageContent() {
       { Header: "Стоимость, $", accessor: "price_usd" },
       { Header: "Стоимость, Руб", accessor: "price_rub" },
       { Header: "Срок поставки", accessor: "expires_in" },
-    ],
-    []
-  );
+    ],[]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: tableData });
@@ -38,10 +38,11 @@ export default function HomePageContent() {
     return result
   }
 
-  function getBackendData() {
-    fetch("/order-info")
+  function getOrdersData() {
+    fetch(BASE_URL)
       .then((response) => {
         if (!response.ok) {
+          setIsOrdersLoadingError(true)
           return {};
         } else {
           return response.json();
@@ -61,50 +62,53 @@ export default function HomePageContent() {
           <h1>Визуализатор заказов</h1>
         </div>
       </header>
-      <main>
-        <div className="data">
-          <div>
-            <label id="total">Всего, $:</label>
-            <textarea id="total" value={total} readOnly={true} />
-          </div>
-          <div className="container-table">
-            <table {...getTableBodyProps()}>
-              <thead>
-                {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => (
-                      <th {...column.getHeaderProps()}>
-                        {column.render("Header")}
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody {...getTableBodyProps}>
-                {rows.map((row) => {
-                  prepareRow(row);
-                  return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map((cell) => (
-                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+      {isOrdersLoadingError ?
+        <div>Ошибка загрузки заказов</div> :
+        <main>
+          <div className="data">
+            <div>
+              <label id="total">Всего, $:</label>
+              <textarea id="total" value={total} readOnly={true} />
+            </div>
+            <div className="container-table">
+              <table {...getTableBodyProps()}>
+                <thead>
+                  {headerGroups.map((headerGroup) => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map((column) => (
+                        <th {...column.getHeaderProps()}>
+                          {column.render("Header")}
+                        </th>
                       ))}
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                  ))}
+                </thead>
+                <tbody {...getTableBodyProps}>
+                  {rows.map((row) => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()}>
+                        {row.cells.map((cell) => (
+                          <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div className="graph">
-          <MyGraph data={tableData} />
-        </div>
-      </main>
+          <div className="graph">
+            <MyGraph data={tableData} />
+          </div>
+        </main>
+      }
     </div>
   );
 }
 
 const homePageLoader = async ({ request, params }) => {
-  const response = await fetch("/order-info");
+  const response = await fetch(BASE_URL);
   const data = await response.json();
   return { data };
 };
