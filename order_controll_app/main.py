@@ -17,6 +17,6 @@ if __name__ == "__main__":
     )
     try:
         # Точка входа во Flask приложение
-        app.run(debug=True)
+        app.run(host="0.0.0.0")
     except Exception as error:
         logger.error(f"Program runtime error: {error}")

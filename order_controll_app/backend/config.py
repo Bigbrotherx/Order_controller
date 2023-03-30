@@ -25,7 +25,7 @@ class DataBaseConfig:
     DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
     DATABASE_URI = (
         f"postgresql+psycopg2://{DATABASE_USER}:"
-        f"{DATABASE_PASSWORD}@0.0.0.0:5432/{DATA_BASE_NAME}"
+        f"{DATABASE_PASSWORD}@postgres:5432/{DATA_BASE_NAME}"
     )
 
 

@@ -1,6 +1,10 @@
 version: "3.9"
+networks:
+ test:
 services:
   postgres:
+    networks:
+      - test
     image: postgres:15-alpine3.17
     environment:
       POSTGRES_DB: "db_date"
@@ -11,10 +15,19 @@ services:
   backend:
     build: .
     image: order_controll_app-web
-    command: ls
+    command: python main.py
+    networks:
+      - test
     ports:
       - "5000:5000"
+    environment:
+      FLASK_URL: http://flask:5000
   frontend:
    build:
      dockerfile: order_controll_app/frontend/Dockerfile
    image: react_front
+   networks:
+      - test
+   command: npm start
+   ports:
+      - "3000:3000"
