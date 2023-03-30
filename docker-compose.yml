@@ -20,8 +20,9 @@ services:
       - test
     ports:
       - "5000:5000"
-    environment:
-      FLASK_URL: http://flask:5000
+    restart: unless-stopped
+    depends_on:
+      - postgres
   frontend:
    build:
      dockerfile: order_controll_app/frontend/Dockerfile
