@@ -28,6 +28,7 @@ def create_app():
 
         from . import tasks
 
+        tasks.data_update_rutine()
         scheduler.start()
 
         from .views import OrderInfo
