@@ -163,3 +163,4 @@ lerna-debug.log
 npm-debug.log*
 /.changelog
 .npm/
+main.js
