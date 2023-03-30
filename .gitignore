@@ -102,7 +102,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -150,7 +149,6 @@ media/
 static/
 
 # сервисные файлы
-order-controller-ae26d5f5c0b4.json
 requirements.in
 
 #React app

@@ -21,7 +21,7 @@ def create_app():
 
     db.init_app(app)
     scheduler.init_app(app)
-    cors.init_app(app)
+    cors.init_app(app, cors_allowed_origins="*")
 
     with app.app_context():
         db.create_all()
