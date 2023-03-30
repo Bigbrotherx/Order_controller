@@ -11,6 +11,10 @@ from . import logger
 
 
 def get_data_from_google() -> pd.DataFrame:
+    """
+    Функция взаимодействия с API Google.
+    Забирает данные из Google таблицы и формирует pandas.data_frame
+    """
     try:
         credentials = service_account.Credentials.from_service_account_file(
             GoogleConfig.SERVICE_ACCOUNT_FILE, scopes=GoogleConfig.SCOPES
