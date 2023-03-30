@@ -8,3 +8,13 @@ services:
       POSTGRES_PASSWORD: "admin"
     ports:
       - "5432:5432"
+  backend:
+    build: .
+    image: order_controll_app-web
+    command: ls
+    ports:
+      - "5000:5000"
+  frontend:
+   build:
+     dockerfile: order_controll_app/frontend/Dockerfile
+   image: react_front

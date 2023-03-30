@@ -37,10 +37,8 @@ class GoogleConfig:
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive",
     ]
-    SERVICE_ACCOUNT_FILE = (
-        Path(__file__).resolve().parent
-        / "service_files"
-        / "order-controller-ae26d5f5c0b4.json"
+    SERVICE_ACCOUNT_FILE = Path(__file__).resolve().parent / os.getenv(
+        "GOOGLE_CLOUD_CREDENTIALS"
     )
     FILE_ID = os.getenv("FILE_ID")
 

@@ -3,7 +3,7 @@ import logging
 from flask import Flask
 
 from .config import DataBaseConfig, AppConfig
-from .extensions import db, scheduler, api
+from .extensions import db, scheduler, api, cors
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -21,13 +21,10 @@ def create_app():
 
     db.init_app(app)
     scheduler.init_app(app)
+    cors.init_app(app)
 
     with app.app_context():
         db.create_all()
-
-        from frontend.views import views
-
-        app.register_blueprint(views, url_prefix="/")
 
         from . import tasks
 

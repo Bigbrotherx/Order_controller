@@ -150,7 +150,7 @@ media/
 static/
 
 # сервисные файлы
-service_files/
+order-controller-ae26d5f5c0b4.json
 requirements.in
 
 #React app
@@ -164,3 +164,4 @@ lerna-debug.log
 npm-debug.log*
 /.changelog
 .npm/
+main.js*

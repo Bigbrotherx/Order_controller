@@ -39,7 +39,7 @@ export default function HomePageContent() {
   }
 
   function getBackendData() {
-    fetch("/order-info")
+    fetch("http://localhost:5000/order-info")
       .then((response) => {
         if (!response.ok) {
           return {};
@@ -104,7 +104,7 @@ export default function HomePageContent() {
 }
 
 const homePageLoader = async ({ request, params }) => {
-  const response = await fetch("/order-info");
+  const response = await fetch("http://localhost:5000/order-info");
   const data = await response.json();
   return { data };
 };
