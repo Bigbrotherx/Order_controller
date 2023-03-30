@@ -24,6 +24,16 @@
 
 ## Как запустить проект в Docker
 
+#### Клонировать репозиторий и перейти в него в командной строке:
+
+```
+git clone https://github.com/Bigbrotherx/Order_controller
+```
+
+```
+cd Order_controller
+```
+
 #### Выполнить команду:
 
 ```
