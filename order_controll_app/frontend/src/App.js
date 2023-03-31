@@ -6,13 +6,13 @@ import {
   createRoutesFromElements,
   createBrowserRouter,
 } from "react-router-dom";
-import HomePageContent, { homePageLoader } from "./HomePageContent";
+import HomePage, { homePageLoader } from "./HomePage";
 
 export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path="/" element={<HomePageContent />} loader={homePageLoader} />
+        <Route path="/" element={<HomePage />} loader={homePageLoader} />
       </Route>
     )
   );

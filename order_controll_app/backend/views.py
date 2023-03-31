@@ -1,6 +1,11 @@
+from http import HTTPStatus
+import json
+
+from flask import abort, Response
 from flask_restful import Resource, fields, marshal_with
 
 from .models import Order
+from . import logger
 
 
 class MyDateFormat(fields.Raw):
@@ -40,5 +45,18 @@ class OrderInfo(Resource):
         Реализация метода GET.
         Декоратор для сериализации данных из ORM.
         """
-        query_set = Order.query.all()
-        return query_set
+        try:
+            query_set = Order.query.all()
+            return query_set
+        except Exception as error:
+            logger.error(f"Data base query finished with error {error}")
+            return abort(
+                Response(
+                    json.dumps(
+                        {
+                            "Message": f"Data base query finished with error {error}"
+                        }
+                    ),
+                    status=HTTPStatus.INTERNAL_SERVER_ERROR.value,
+                )
+            )

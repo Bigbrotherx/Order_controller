@@ -1,3 +1,4 @@
+from . import logger
 from .models import Order
 from .utils import get_data_from_google, get_currency_rate
 from .extensions import scheduler
@@ -14,7 +15,10 @@ def data_update_rutine():
     name, currency = get_currency_rate()
     if name == "Доллар США":
         with scheduler.app.app_context():
-            Order.update_data(data, currency)
+            try:
+                Order.update_data(data, currency)
+            except Exception as error:
+                logger.error(f"Data base update finished with error {error}")
 
 
 @scheduler.task("interval", id="telegram_bot", seconds=60 * 60 * 24)
