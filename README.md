@@ -83,22 +83,45 @@ python3.9 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-#### Создать файл `.env`  в дериктории `<project_dir>/order_controll_app/backend`
+#### Для тестирования проект содержит файлы с ключами (никогда так не делайте с персональными данными) в случае отсутствия сделать следущее:
 
-Содержание файла `.env` :
+* [Получить](https://support.google.com/a/answer/7378726?hl=ru) .json файл от сервисного аккаунта Google
+* Создать свой файл `.env`  в дериктории `<project_dir>/order_controll_app/backend`
+* Содержание файла `.env` :
+* ```
+  SECRET_KEY=<Секретный ключ Flask приложения (любая строка известаная только вам))>
+  GOOGLE_API_KEY=<Токен от сервисного аккаунта Google Cloud>
+  GOOGLE_CLOUD_CREDENTIALS=<путь до json файла с секретами от сервисного аккауунта Google Cloud>
+  DATABASE_PASSWORD=<Пароль вашей БД>
+  DATABASE_USER=<Имя пользователя вашей БД>
+  FILE_ID=<Id файла в Google Sheets>
+  TELEGRAM_TOKEN = <Токен телеграм бота>
+  TELEGRAM_CHAT_ID = <id чата телеграм бота>
+  ```
 
-```python
-SECRET_KEY=<Секретный ключ Flask приложения (любая строка известаная только вам))>
-GOOGLE_API_KEY=<Токен от сервисного аккаунта Google Cloud>
-GOOGLE_CLOUD_CREDENTIALS=<путь до json файла с секретами от сервисного аккауунта Google Cloud>
-DATABASE_PASSWORD=<Пароль вашей БД>
-DATABASE_USER=<Имя пользователя вашей БД>
-FILE_ID=<Id файла в Google Sheets>
-TELEGRAM_TOKEN = <Токен телеграм бота>
-TELEGRAM_CHAT_ID = <id чата телеграм бота>
-```
+#### Запустить вашу БД Postgress
 
-#### Запустить вашу Postgress БД
+##### Запуск в Docker:
+
+* В корне проекта создать файл `docker-compose.yml`
+* В файл поместить код:
+* ```
+  version: "3.9"
+  networks:
+   test:
+  services:
+    postgres:
+      networks:
+        - test
+      image: postgres:15-alpine3.17
+      environment:
+        POSTGRES_DB: "db_date"
+        POSTGRES_USER: "admin"
+        POSTGRES_PASSWORD: "admin"
+      ports:
+        - "5432:5432"
+  ```
+* Выполнить команду в терминале `docker-compose up --build`
 
 #### Запустить Backend приложение
 
